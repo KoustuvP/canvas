@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {RequestNode } from './request-node'
+import { timeout } from 'rxjs/operators';
+import { RequestNode } from './request-node'
 
 @Component({
   selector: 'app-canvas',
@@ -19,10 +20,10 @@ export class CanvasComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.node=new RequestNode(1,20,75);
+    this.node=new RequestNode(1,20,75);
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.drawStructure();
-
+    this.drawNode(this.node);
   }
 
   drawStructure():void{
@@ -36,12 +37,14 @@ export class CanvasComponent implements OnInit {
     this.ctx.stroke();
     this.ctx.closePath();
   }
-  // drawNode(node:RequestNode){
-  //   this.ctx.beginPath();
-  //   this.ctx.arc(node.xCord, node.yCord, 10, 0, 2 * Math.PI);
-  //   this.ctx.stroke();
-  //   this.ctx.closePath();
-  // }
+  drawNode(node:RequestNode){
+    this.ctx.beginPath();
+    this.ctx.arc(node.xCord, node.yCord, 10, 0, 2 * Math.PI);
+    this.ctx.stroke();
+    this.ctx.closePath();
+  }
+
+
  
 
 }
